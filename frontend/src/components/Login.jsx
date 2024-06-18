@@ -29,9 +29,9 @@ const Login = () => {
         if(!res.ok){
             throw new Error("Network response was not OK"); 
         } 
-        const {success, data} = res.json()
-        console.log(data)
-        if(success){
+        const data= await res.json()
+        console.log(data['message'])
+        if(data['success']){
             navigate('/')
         }
         

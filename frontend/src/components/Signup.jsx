@@ -31,9 +31,9 @@ const Signup = () => {
       if(!res.ok){
         throw new Error("Network response was not OK");
       } 
-      const {success, data} = res.json()
-      console.log(data)
-      if(success){
+      const data= await res.json()
+      console.log(data['message'])
+      if(data['success']){
         navigate('/')
       }
       
@@ -51,7 +51,7 @@ const Signup = () => {
             type="text" 
             id="username" 
             name="username" 
-            placeholder='Input username' 
+            placeholder='Username' 
             required 
             value={username}
             onChange={handleOnChange}/>
@@ -63,7 +63,7 @@ const Signup = () => {
             type="text" 
             id='email' 
             name='email' 
-            placeholder='Input email' 
+            placeholder='Email' 
             required 
             value={email}
             onChange={handleOnChange}/>
@@ -73,17 +73,17 @@ const Signup = () => {
         <div>
           <label htmlFor="pasword">Password</label>
           <input 
-          type="text" 
+          type="password" 
           id='password' 
-          name='pasword' 
-          placeholder='Input password' 
+          name='password' 
+          placeholder='Password' 
           required 
           value={password}
           onChange={handleOnChange}/>
         </div>
 
           <button type='submit'>Sign up</button>
-          <span>Already have an account</span>
+          <span>Already have an account? <Link to={"/login"}>Log in</Link></span>
         </form>
     </div>
   )

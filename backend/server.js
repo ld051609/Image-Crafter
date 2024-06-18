@@ -3,7 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import authRoute from './routes/authRoute.js'; // Ensure the extension is included
-
+import dbConnect from './middleware/dbConnect.js';
+import generateImage from './api/api.js';
 dotenv.config();
 
 const app = express();
@@ -14,17 +15,14 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
+// Database connection
+dbConnect();
+
 // Routes
 app.use("/", authRoute);
 
-// API
-// const response = await openai.images.generate({
-//     model: "dall-e-3",
-//     prompt: "a white siamese cat",
-//     n: 1,
-//     size: "1024x1024",
-// });
-// const image_url = response.data[0].url;
+generateImage();
+
 
 // Initialize the server
 app.listen(port, () => {

@@ -8,10 +8,10 @@ export const Signup = async (req, res, next) => {
         if (!username || !email || !password) {
             return res.status(400).json({ message: 'Please fill in all fields' });
         }
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
-        }
+        // const existingUser = await User.findOne({ email });
+        // if (existingUser) {
+        //     return res.status(400).json({ message: 'User already exists' });
+        // }
         // Create user
         const user = await User.create({ username, email, password, createdAt });
         // Generate token
