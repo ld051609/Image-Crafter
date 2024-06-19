@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {useState} from 'react'
+import styles from './Signup.module.css'
 const Signup = () => {
   const navigate = useNavigate()
 
@@ -34,7 +35,7 @@ const Signup = () => {
       const data= await res.json()
       console.log(data['message'])
       if(data['success']){
-        navigate('/')
+        navigate('/imageGeneration')
       }
       
     } catch (error) {
@@ -44,8 +45,9 @@ const Signup = () => {
   }
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className={styles.container}>
+        <h1>Sign up</h1>
+        <div className={styles.subcontainer}>
             <label htmlFor="username">Username</label>
             <input 
             type="text" 
@@ -57,7 +59,7 @@ const Signup = () => {
             onChange={handleOnChange}/>
 
         </div>
-        <div>
+        <div className={styles.subcontainer}>
             <label htmlFor="email">Email</label>
             <input 
             type="text" 
@@ -70,7 +72,7 @@ const Signup = () => {
 
         </div>
 
-        <div>
+        <div className={styles.subcontainer}>
           <label htmlFor="pasword">Password</label>
           <input 
           type="password" 
@@ -82,7 +84,7 @@ const Signup = () => {
           onChange={handleOnChange}/>
         </div>
 
-          <button type='submit'>Sign up</button>
+          <button type='submit' className={styles.signupBtn}>Sign up</button>
           <span>Already have an account? <Link to={"/login"}>Log in</Link></span>
         </form>
     </div>

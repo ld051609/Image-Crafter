@@ -7,10 +7,10 @@ const openai = new OpenAI({
     project: "proj_A8G5sob0fc2bLRqLYSyofsSV",
     apiKey: process.env.OPEN_API_KEY
 })
-export default async function generateImage() {
+export default async function generateImage(inputPrompt) {
     const response = await openai.images.generate({
         model: "dall-e-2",
-        prompt: "a white siamese cat",
+        prompt: inputPrompt,
         n: 1,
         size: "1024x1024",
     });

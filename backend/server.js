@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import authRoute from './routes/authRoute.js'; // Ensure the extension is included
 import dbConnect from './middleware/dbConnect.js';
-import generateImage from './api/api.js';
+import createImgRoute from './routes/createImgRoute.js';
 dotenv.config();
 
 const app = express();
@@ -20,8 +20,7 @@ dbConnect();
 
 // Routes
 app.use("/", authRoute);
-
-generateImage();
+app.use("/", createImgRoute);
 
 
 // Initialize the server

@@ -1,0 +1,47 @@
+h1{
+    text-align: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 10px;
+    row-gap: 20px;
+}
+.subcontainer, .subcontainer2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.signUpBtn{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.signUpBtn:hover{
+    background-color: #45a049a7;
+}
+.title{
+    font-weight: bolder;
+    text-decoration: underline;
+    color: #367e38;
+}
+.logInBtn{
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.2s ease;
+    color: rgba(0, 0, 0, 0.503);
+}
+.logInBtn:hover{
+    font-size: medium;
+    color: black;
+}
