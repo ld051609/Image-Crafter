@@ -22,3 +22,7 @@
     transition: 0.2s ease;
 
 }
+.logInBtn:hover{
+    background-color: #4caf4f91;
+    
+}

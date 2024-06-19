@@ -2,7 +2,7 @@ import React from 'react'
 import Homepage from './pages/Homepage'
 import Login from './components/Login/Login'
 import Signup from './components/Signup/Signup'
-import GenerateImage from './components/GenerateImage'
+import GenerateImage from './components/GenerateImage/GenerateImage'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 const App = () => {
   return (

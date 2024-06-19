@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import styles from './GenerateImage.module.css'
 const GenerateImage = () => {
     const [input, setInput] = useState('')
     const [imgUrl, setImgUrl] = useState('')    
@@ -28,21 +29,22 @@ const GenerateImage = () => {
         }
     }
   return (
-    <div>
-        <div>
+    <div className={styles.container}>
+        <div className={styles.inputBox}>
             <input 
             type="text" 
             required 
             placeholder='Giving a prompt for image generation'
             onChange={handleOnChange}
             value={input}
+            className={styles.input}
             />
-            <button type='submit' onSubmit={handleOnSubmit}>Generate AI Image</button>
+            <button type='submit' onSubmit={handleOnSubmit} className={styles.btn}>Generate AI Image</button>
 
         </div>
 
-        <div>
-            <img src={imgUrl} alt="Generated AI Image" />
+        <div className={styles.imgBox}>
+            <img src={imgUrl} alt="" />
         </div>
 
     </div>
