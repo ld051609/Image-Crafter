@@ -7,27 +7,29 @@ const GenerateImage = () => {
     const handleOnChange = (e) => {
         setInput(e.target.value)
     }
-    const handleOnSubmit = async(e) => {
+    const handleOnClick = async (e) => {
         e.preventDefault();
+        console.log(`Input: ${input}`);
         try {
             const res = await fetch("http://localhost:8080/createImg", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({prompt: input})
-            })
-            if(!res.ok){
+                body: JSON.stringify({ inputPrompt: input }) // Ensure key matches the server's expected key
+            });
+            console.log(res);
+            if (!res.ok) {
                 throw new Error("Network response was not OK");
             }
-            const data = await res.json()
-            console.log(`Generated Image Data: ${data}`)
-            setImgUrl(data)
-            
+            const data = await res.json();
+            console.log(`Generated Image Data: ${data.image_url}`);
+            setImgUrl(data.image_url);
         } catch (error) {
-            console.log(error)
+            console.error("Error:", error);
         }
-    }
+    };
+
   return (
     <div className={styles.container}>
         <div className={styles.inputBox}>
@@ -39,7 +41,7 @@ const GenerateImage = () => {
             value={input}
             className={styles.input}
             />
-            <button type='submit' onSubmit={handleOnSubmit} className={styles.btn}>Generate AI Image</button>
+            <button onClick={handleOnClick} className={styles.btn}>Generate AI Image</button>
 
         </div>
 

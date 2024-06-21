@@ -1,7 +1,8 @@
-import {generateImage} from '../api/api.js';
+import generateImage from '../api/api.js';
 export const createImg = async (req, res) => {
     try {
-        const inputPrompt = req.body;
+        const {inputPrompt} = req.body;
+        console.log(`Prompt: ${inputPrompt}`);
         if(!inputPrompt) {
             return res.status(400).json({ message: "Prompt is required" });
         }

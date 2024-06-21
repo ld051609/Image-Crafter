@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: center;
     gap: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .input{
     padding: 10px 20px;
@@ -21,7 +21,7 @@
     font-size: 16px;
 }
 .imgBox{
-    border: 1px solid black;
+    border: 2px solid rgba(84, 84, 84, 0.437);
     width: 600px;
     height: 600px;
 }
