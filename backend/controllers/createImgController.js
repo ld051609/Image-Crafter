@@ -7,7 +7,7 @@ export const createImg = async (req, res) => {
             return res.status(400).json({ message: "Prompt is required" });
         }
         const image_url = await generateImage(inputPrompt);
-        return res.status(200).json({ image_url });
+        return res.status(200).json({image_url : image_url });
     } catch (err) {
         console.log(err);
     }

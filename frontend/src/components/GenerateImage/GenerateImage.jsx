@@ -1,7 +1,45 @@
-import React from 'react'
-import { useState } from 'react'
-import styles from './GenerateImage.module.css'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
+import styles from './GenerateImage.module.css';
 const GenerateImage = () => {
+    const navigate = useNavigate()
+    const [cookies, removeCookie] = useCookies([])
+    const [username, setUsername] = useState('')
+
+    useEffect(() => {
+        const verifyCookie = async() => {
+            if(!cookies.jwtToken){
+                navigate('/login')
+            }
+            try {
+                const {data} = await axios.post(
+                    'http://localhost:8080',
+                    {},
+                    {withCredentials: true}
+                );
+                const {status, username} = data;
+                if(status){
+                    setUsername(username)
+                } else {
+                    removeCookie('jwtToken')
+                    navigate('/login')
+                }
+                
+            } catch (error) {
+                console.log('Verification error:', error)
+                removeCookie('jwtToken')
+                navigate('/login')
+                
+            }
+        };
+        verifyCookie();
+    }, [cookies, navigate, removeCookie])
+
+
+
+
     const [input, setInput] = useState('')
     const [imgUrl, setImgUrl] = useState('')    
     const handleOnChange = (e) => {
@@ -30,6 +68,11 @@ const GenerateImage = () => {
         }
     };
 
+    const Logout = () => {
+        removeCookie('jwtToken')
+        navigate('/signup')
+    }
+
   return (
     <div className={styles.container}>
         <div className={styles.inputBox}>
@@ -48,6 +91,8 @@ const GenerateImage = () => {
         <div className={styles.imgBox}>
             <img src={imgUrl} alt="" />
         </div>
+
+        <button className={styles.logoutBtn} onClick={Logout}>Log out</button>
 
     </div>
   )

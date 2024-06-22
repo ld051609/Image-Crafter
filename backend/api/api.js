@@ -12,10 +12,11 @@ export default async function generateImage(inputPrompt) {
         model: "dall-e-2",
         prompt: inputPrompt,
         n: 1,
-        size: "1024x1024",
+        size: "512x512", 
     });
     const image_url = response.data[0].url;
     console.log(image_url)
+    return image_url;
 
 }
 

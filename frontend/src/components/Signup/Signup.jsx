@@ -2,7 +2,9 @@ import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {useState} from 'react'
 import styles from './Signup.module.css'
+import GenerateImage from '../GenerateImage/GenerateImage'
 const Signup = () => {
+  const [loggedIn, setLoggedIn] = useState(false); // State to track login status
   const navigate = useNavigate()
 
   const [inputValue, setInputValue] = useState({
@@ -35,7 +37,7 @@ const Signup = () => {
       const data= await res.json()
       console.log(data['message'])
       if(data['success']){
-        navigate('/imageGeneration')
+        setLoggedIn(true)
       }
       
     } catch (error) {
@@ -45,48 +47,53 @@ const Signup = () => {
   }
   return (
     <div>
-      <form onSubmit={handleSubmit} className={styles.container}>
-        <h1>Sign up</h1>
-        <div className={styles.subcontainer}>
-            <label htmlFor="username">Username</label>
+      {loggedIn ? (
+        <GenerateImage/>
+      ) : (
+        <form onSubmit={handleSubmit} className={styles.container}>
+          <h1>Sign up</h1>
+          <div className={styles.subcontainer}>
+              <label htmlFor="username">Username</label>
+              <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              placeholder='Username' 
+              required 
+              value={username}
+              onChange={handleOnChange}/>
+
+          </div>
+          <div className={styles.subcontainer}>
+              <label htmlFor="email">Email</label>
+              <input 
+              type="text" 
+              id='email' 
+              name='email' 
+              placeholder='Email' 
+              required 
+              value={email}
+              onChange={handleOnChange}/>
+
+          </div>
+
+          <div className={styles.subcontainer}>
+            <label htmlFor="pasword">Password</label>
             <input 
-            type="text" 
-            id="username" 
-            name="username" 
-            placeholder='Username' 
+            type="password" 
+            id='password' 
+            name='password' 
+            placeholder='Password' 
             required 
-            value={username}
+            value={password}
             onChange={handleOnChange}/>
+          </div>
 
-        </div>
-        <div className={styles.subcontainer}>
-            <label htmlFor="email">Email</label>
-            <input 
-            type="text" 
-            id='email' 
-            name='email' 
-            placeholder='Email' 
-            required 
-            value={email}
-            onChange={handleOnChange}/>
+            <button type='submit' className={styles.signupBtn}>Sign up</button>
+            <span>Already have an account? <Link to={"/login"}>Log in</Link></span>
+          </form>
 
-        </div>
-
-        <div className={styles.subcontainer}>
-          <label htmlFor="pasword">Password</label>
-          <input 
-          type="password" 
-          id='password' 
-          name='password' 
-          placeholder='Password' 
-          required 
-          value={password}
-          onChange={handleOnChange}/>
-        </div>
-
-          <button type='submit' className={styles.signupBtn}>Sign up</button>
-          <span>Already have an account? <Link to={"/login"}>Log in</Link></span>
-        </form>
+      )}
     </div>
   )
 }
